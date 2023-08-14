@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Result, success, isFailure, Success } from './result'
+import { Result, success, isFailure, getValue } from './result'
 
 export default function <S, T>(
   ...fns: ((arg: any) => Result<any> | Promise<Result<any>>)[]
@@ -9,7 +9,7 @@ export default function <S, T>(
   }
 }
 
-function pipeFunction(
+export function pipeFunction(
   value: any,
   fn: (arg: any) => Result<any> | Promise<Result<any>>,
   fns: ((arg: any) => Result<any> | Promise<Result<any>>)[],
@@ -23,7 +23,7 @@ function pipeFunction(
       } else {
         return fns.length === 0
           ? r
-          : pipeFunction((r as Success<any>).value, fns[0], fns.slice(1))
+          : pipeFunction(getValue(r), fns[0], fns.slice(1))
       }
     })
   } else {
@@ -32,7 +32,7 @@ function pipeFunction(
     } else {
       return fns.length === 0
         ? result
-        : pipeFunction((result as Success<any>).value, fns[0], fns.slice(1))
+        : pipeFunction(getValue(result), fns[0], fns.slice(1))
     }
   }
 }

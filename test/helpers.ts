@@ -52,3 +52,8 @@ export async function append3Async(s: string): Promise<Result<string>> {
 export function addFail(x: number): Result<number> {
   return failure('fail')
 }
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export async function addFailAsync(x: number): Promise<Result<number>> {
+  return failure('fail')
+}
