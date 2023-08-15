@@ -5,7 +5,7 @@ import { Result, success } from './result'
 export default function <S, T>(
   ...fns: ((arg: any) => Result<any> | Promise<Result<any>>)[]
 ): (x: S) => Result<T> | Promise<Result<T>> {
-  const reversedFns = fns.toReversed()
+  const reversedFns = [...fns].reverse()
 
   return (x: S): Result<T> | Promise<Result<T>> => {
     return reversedFns.length === 0
