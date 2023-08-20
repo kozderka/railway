@@ -1,9 +1,9 @@
 {
   "name": "@kozderka/railway",
-  "version": "0.0.0-alpha.0",
+  "version": "0.0.0-alpha.1",
   "description": "Package provides functions for railway oriented programming",
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=16.0.0"
   },
   "exports": {
     "./package.json": "./package.json",
