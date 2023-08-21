@@ -1,10 +1,10 @@
 export interface Success<T> {
-  readonly success: true
+  readonly success: boolean
   readonly value: T
 }
 
 export interface Failure {
-  readonly success: false
+  readonly success: boolean
   readonly error: string
 }
 
