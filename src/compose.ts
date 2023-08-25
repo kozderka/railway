@@ -2,12 +2,12 @@
 import { pipeFunction } from './pipe'
 import { Result, success } from './result'
 
-export default function <S, T>(
-  ...fns: ((arg: any) => Result<any> | Promise<Result<any>>)[]
-): (x: S) => Result<T> | Promise<Result<T>> {
-  const reversedFns = [...fns].reverse()
+export default function <V, S, E>(
+  ...fns: ((arg: any) => Result<any, any> | Promise<Result<any, any>>)[]
+): (x: V) => Result<S, E> | Promise<Result<S, E>> {
+  const reversedFns = fns.toReversed()
 
-  return (x: S): Result<T> | Promise<Result<T>> => {
+  return (x: V): Result<S, E> | Promise<Result<S, E>> => {
     return reversedFns.length === 0
       ? success(x)
       : pipeFunction(x, reversedFns[0], reversedFns.slice(1))

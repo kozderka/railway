@@ -1,34 +1,34 @@
-export interface Success<T> {
-  readonly success: boolean
-  readonly value: T
+export interface Success<S> {
+  readonly success: true
+  readonly value: S
 }
 
-export interface Failure {
-  readonly success: boolean
-  readonly error: string
+export interface Failure<E> {
+  readonly success: false
+  readonly error: E
 }
 
-export type Result<T> = Success<T> | Failure
+export type Result<S, E> = Success<S> | Failure<E>
 
-export function success<T>(value: T): Success<T> {
+export function success<S>(value: S): Success<S> {
   return { success: true, value }
 }
 
-export function failure(error: string): Failure {
+export function failure<E>(error: E): Failure<E> {
   return { success: false, error }
 }
 
-export function isSuccess<T>(result: Result<T>): boolean {
+export function isSuccess<S, E>(result: Result<S, E>): boolean {
   return result.success === true
 }
 
-export function isFailure<T>(result: Result<T>): boolean {
+export function isFailure<S, E>(result: Result<S, E>): boolean {
   return result.success === false
 }
 
-export function getValue<T>(result: Result<T>): T {
+export function getValue<S, E>(result: Result<S, E>): S {
   if (isSuccess(result)) {
-    return (result as Success<T>).value
+    return (result as Success<S>).value
   } else {
     throw new Error('Cannot get value of failure result')
   }

@@ -24,13 +24,13 @@ test('Call with empty argumets', () => {
 test('Call async / sync functions with failure in async function', async () => {
   const result = pipe(add1, add2Async, addFailAsync, add3Async, add1)(0)
 
-  await expect(result).resolves.toEqual(failure('fail'))
+  await expect(result).resolves.toEqual(failure('failure'))
 })
 
 test('Call async / sync functions with failure', async () => {
   const result = pipe(add1, add2Async, addFail, add3Async, add1)(0)
 
-  await expect(result).resolves.toEqual(failure('fail'))
+  await expect(result).resolves.toEqual(failure('failure'))
 })
 
 test('Call async / sync functions with success result', async () => {
@@ -64,7 +64,7 @@ test('Call functions in correct order', () => {
 })
 
 test('Call functions with failure', () => {
-  const result = pipe<number, Result<number>>(add1, add2, add3, addFail)(0)
+  const result = pipe<number, number, 'failure'>(add1, add2, add3, addFail)(0)
 
-  expect(result).toEqual(failure('fail'))
+  expect(result).toEqual(failure('failure'))
 })

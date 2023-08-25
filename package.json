@@ -3,7 +3,7 @@
   "version": "0.0.0-alpha.1",
   "description": "Package provides functions for railway oriented programming",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.0.0"
   },
   "exports": {
     "./package.json": "./package.json",
@@ -42,7 +42,7 @@
     "@vitest/coverage-v8": "^0.34.1",
     "eslint": "^8.46.0",
     "prettier": "^3.0.1",
-    "typescript": "^5.1.6",
+    "typescript": "^5.2.0",
     "unbuild": "^1.2.1",
     "vitest": "^0.34.1"
   }
