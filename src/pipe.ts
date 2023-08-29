@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Result, success, isFailure, getValue } from './result'
+import { Result, success } from './result'
 
-export default function <V, S, E>(
-  ...fns: ((arg: any) => Result<any, any> | Promise<Result<any, any>>)[]
-): (x: V) => Result<S, E> | Promise<Result<S, E>> {
-  return (x: V): Result<S, E> | Promise<Result<S, E>> => {
-    return fns.length === 0 ? success(x) : pipeFunction(x, fns[0], fns.slice(1))
-  }
+export function pipe <V, T, E>(
+  x: V,
+  ...fns: ((arg: Result<any, any>) => Result<any, any> | Promise<Result<any, any>>)[]
+): Result<T, E> | Promise<Result<T, E>> {
+    return fns.length === 0 ? success(x) : pipeFunction(success(x), fns[0], fns.slice(1))
 }
 
 export function pipeFunction(
@@ -19,22 +18,14 @@ export function pipeFunction(
   if (result instanceof Promise) {
     return result.then(
       (r: Result<any, any>): Result<any, any> | Promise<Result<any, any>> => {
-        if (isFailure(r)) {
-          return r
-        } else {
           return fns.length === 0
             ? r
-            : pipeFunction(getValue(r), fns[0], fns.slice(1))
-        }
+            : pipeFunction(r, fns[0], fns.slice(1))
       },
     )
   } else {
-    if (isFailure(result)) {
-      return result
-    } else {
       return fns.length === 0
         ? result
-        : pipeFunction(getValue(result), fns[0], fns.slice(1))
-    }
+        : pipeFunction(result, fns[0], fns.slice(1))
   }
 }

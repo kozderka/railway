@@ -2,14 +2,12 @@
 import { pipeFunction } from './pipe'
 import { Result, success } from './result'
 
-export default function <V, S, E>(
+export function compose<V, S, E>(
   ...fns: ((arg: any) => Result<any, any> | Promise<Result<any, any>>)[]
 ): (x: V) => Result<S, E> | Promise<Result<S, E>> {
-  const reversedFns = fns.toReversed()
+  const reversedFns = [...fns].reverse()
 
-  return (x: V): Result<S, E> | Promise<Result<S, E>> => {
-    return reversedFns.length === 0
+    return (x: V): Result<S, E> | Promise<Result<S, E>> => reversedFns.length === 0
       ? success(x)
-      : pipeFunction(x, reversedFns[0], reversedFns.slice(1))
-  }
+      : pipeFunction(success(x), reversedFns[0], reversedFns.slice(1))
 }

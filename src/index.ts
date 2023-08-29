@@ -1,2 +1,3 @@
-export * as pipe from './pipe'
-export * as compose from './compose'
+export * from './pipe'
+export * from './compose'
+export * from './result'
