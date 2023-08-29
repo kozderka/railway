@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { pipeFunction } from './pipe'
+import { reduceLeft } from './pipe'
 import { Result, success } from './result'
 
 export function compose<V, S, E>(
@@ -9,5 +9,5 @@ export function compose<V, S, E>(
 
     return (x: V): Result<S, E> | Promise<Result<S, E>> => reversedFns.length === 0
       ? success(x)
-      : pipeFunction(success(x), reversedFns[0], reversedFns.slice(1))
+      : reduceLeft(success(x), reversedFns[0], reversedFns.slice(1))
 }
