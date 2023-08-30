@@ -36,15 +36,21 @@ export function append3(s: string): Result<string, 'failure'> {
   return success(s + '3')
 }
 
-export async function append1Async(s: string): Promise<Result<string, 'failure'>> {
+export async function append1Async(
+  s: string,
+): Promise<Result<string, 'failure'>> {
   return success(s + '1')
 }
 
-export async function append2Async(s: string): Promise<Result<string, 'failure'>> {
+export async function append2Async(
+  s: string,
+): Promise<Result<string, 'failure'>> {
   return success(s + '2')
 }
 
-export async function append3Async(s: string): Promise<Result<string, 'failure'>> {
+export async function append3Async(
+  s: string,
+): Promise<Result<string, 'failure'>> {
   return success(s + '3')
 }
 
@@ -54,6 +60,9 @@ export function addFail(x: number): Result<number, 'failure'> {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function addFailAsync(x: number): Promise<Result<number, 'failure'>> {
+export async function addFailAsync(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  x: number,
+): Promise<Result<number, 'failure'>> {
   return failure('failure')
 }

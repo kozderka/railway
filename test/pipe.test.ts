@@ -1,5 +1,5 @@
 import { expect, test } from 'vitest'
-import { pipe} from '../src/pipe'
+import { pipe } from '../src/pipe'
 import { success, failure, chain } from '../src/result'
 import {
   add1,
@@ -22,19 +22,39 @@ test('Call with empty argumets', () => {
 })
 
 test('Call async / sync functions with failure in async function', async () => {
-  const result = pipe(0, chain(add1), chain(add2Async), chain(addFailAsync), chain(add3Async), chain(add1))
+  const result = pipe(
+    0,
+    chain(add1),
+    chain(add2Async),
+    chain(addFailAsync),
+    chain(add3Async),
+    chain(add1),
+  )
 
   await expect(result).resolves.toEqual(failure('failure'))
 })
 
 test('Call async / sync functions with failure', async () => {
-  const result = pipe(0, chain(add1), chain(add2Async), chain(addFail), chain(add3Async), chain(add1))
+  const result = pipe(
+    0,
+    chain(add1),
+    chain(add2Async),
+    chain(addFail),
+    chain(add3Async),
+    chain(add1),
+  )
 
   await expect(result).resolves.toEqual(failure('failure'))
 })
 
 test('Call async / sync functions with success result', async () => {
-  const result = pipe(0, chain(add1), chain(add2Async), chain(add3Async), chain(add1))
+  const result = pipe(
+    0,
+    chain(add1),
+    chain(add2Async),
+    chain(add3Async),
+    chain(add1),
+  )
 
   await expect(result).resolves.toEqual(success(7))
 })

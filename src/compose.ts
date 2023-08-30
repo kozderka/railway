@@ -7,7 +7,6 @@ export function compose<V, S, E>(
 ): (x: V) => Result<S, E> | Promise<Result<S, E>> {
   const reversedFns = [...fns].reverse()
 
-    return (x: V): Result<S, E> | Promise<Result<S, E>> => reversedFns.length === 0
-      ? success(x)
-      : reduceLeft(success(x), reversedFns[0], reversedFns.slice(1))
+  return (x: V): Result<S, E> | Promise<Result<S, E>> =>
+    reduceLeft(success(x), reversedFns)
 }

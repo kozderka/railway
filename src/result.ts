@@ -37,8 +37,16 @@ export function getValue<S, E>(result: Result<S, E>): S {
   }
 }
 
-export function chain<T, S, E>(f: (a: T) => Result<S, E> | Promise<Result<S, E>>) {
-  return <F>(result: Result<T, F>): Result<S, E> | Result<T, F> | Promise<Result<S, E>> | Promise<Result<T, F>> => {
+export function chain<T, S, E>(
+  f: (a: T) => Result<S, E> | Promise<Result<S, E>>,
+) {
+  return <F>(
+    result: Result<T, F>,
+  ):
+    | Result<S, E>
+    | Result<T, F>
+    | Promise<Result<S, E>>
+    | Promise<Result<T, F>> => {
     if (isSuccess(result)) {
       return f(getValue(result))
     } else {
