@@ -3,14 +3,18 @@ import { Result, success } from './result'
 
 export function pipe<V, T, E>(
   x: V,
-  ...fns: ((arg: any) => Result<any, any> | Promise<Result<any, any>>)[]
-): Result<T, E> | Promise<Result<T, E>> {
-  return reduceLeft(success(x), fns)
+  ...fns: ((arg: any) => any | Result<any, any> | Promise<Result<any, any>>)[]
+): Result<V, E> | Result<T, E> | Promise<Result<T, E>> {
+  if (fns.length === 0) {
+    return success(x)
+  }
+
+  return reduceLeft(x, fns)
 }
 
 export function reduceLeft(
-  value: Result<any, any>,
-  fns: ((arg: any) => Result<any, any> | Promise<Result<any, any>>)[],
+  value: any | Result<any, any>,
+  fns: ((arg: any) => any | Result<any, any> | Promise<Result<any, any>>)[],
 ): Result<any, any> | Promise<Result<any, any>> {
   if (fns.length === 0) {
     return value

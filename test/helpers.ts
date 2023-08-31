@@ -1,5 +1,17 @@
 import { Result, failure, success } from '../src/result'
 
+export function add1WithoutRailwayResult(x: number): number {
+  return x + 1
+}
+
+export function add2WithoutRailwayResult(x: number): number {
+  return x + 2
+}
+
+export function add3WithoutRailwayResult(x: number): number {
+  return x + 3
+}
+
 export function add1(x: number): Result<number, 'failure'> {
   return success(x + 1)
 }

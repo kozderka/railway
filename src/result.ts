@@ -37,6 +37,16 @@ export function getValue<S, E>(result: Result<S, E>): S {
   }
 }
 
+export function toResult<T, S, E>(fn: (a: T) => S, error: E) {
+  return (a: T): Result<S, E> => {
+    try {
+      return success(fn(a))
+    } catch (e) {
+      return failure(error)
+    }
+  }
+}
+
 export function chain<T, S, E>(
   f: (a: T) => Result<S, E> | Promise<Result<S, E>>,
 ) {
