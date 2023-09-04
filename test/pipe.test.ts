@@ -21,7 +21,7 @@ import {
 test('Call with empty argumets', () => {
   const result = pipe('')
 
-  expect(result).toEqual(success(''))
+  expect(result).toEqual('')
 })
 
 test('Call async / sync functions with failure in async function', async () => {
@@ -91,10 +91,10 @@ test('Call clasic functions', () => {
     0,
     add1WithoutRailwayResult,
     add2WithoutRailwayResult,
-    toResult(add3WithoutRailwayResult, 'failure'),
+    add3WithoutRailwayResult,
   )
 
-  expect(result).toEqual(success(6))
+  expect(result).toEqual(6)
 })
 
 test('Mix clasic and railway functions', () => {

@@ -20,7 +20,7 @@ import {
 test('Call with empty argumets', () => {
   const result = compose()('')
 
-  expect(result).toEqual(success(''))
+  expect(result).toEqual('')
 })
 
 test('Call async / sync functions with failure', async () => {
@@ -78,12 +78,12 @@ test('Call functions with failure', () => {
 
 test('Call clasic functions', () => {
   const result = compose(
-    toResult(add1WithoutRailwayResult, 'failure'),
+    add1WithoutRailwayResult,
     add2WithoutRailwayResult,
     add3WithoutRailwayResult,
   )(0)
 
-  expect(result).toEqual(success(6))
+  expect(result).toEqual(6)
 })
 
 test('Mix clasic and railway functions', () => {

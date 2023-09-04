@@ -1,15 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { reduceLeft } from './pipe'
-import { Result, success } from './result'
 
-export function flow<V, S, E>(
-  ...fns: ((arg: any) => any | Result<any, any> | Promise<Result<any, any>>)[]
-): (x: V) => Result<V, E> | Result<S, E> | Promise<Result<S, E>> {
-  return (x: V): Result<V, E> | Result<S, E> | Promise<Result<S, E>> => {
-    if (fns.length === 0) {
-      return success(x)
-    }
-
+export function flow<A, B>(
+  ...fns: ((arg: any) => any | Promise<any>)[]
+): (x: A) => A | B | Promise<B> {
+  return (x: A): B | Promise<B> => {
     return reduceLeft(x, fns)
   }
 }

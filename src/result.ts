@@ -47,17 +47,15 @@ export function toResult<T, S, E>(fn: (a: T) => S, error: E) {
   }
 }
 
-export function chain<T, S, E>(
-  f: (a: T) => Result<S, E> | Promise<Result<S, E>>,
+export function chain<A, B, E>(
+  f: (a: A) => Result<B, E> | Promise<Result<B, E>>,
 ) {
-  return <F>(
-    result: Result<T, F>,
-  ):
-    | Result<S, E>
-    | Result<T, F>
-    | Promise<Result<S, E>>
-    | Promise<Result<T, F>> => {
-    if (isSuccess(result)) {
+  return (
+    result: Result<A, E> | Promise<Result<A, E>>,
+  ): Result<A, E> | Result<B, E> | Promise<Result<A, E> | Result<B, E>> => {
+    if (result instanceof Promise) {
+      return result.then(chain(f))
+    } else if (isSuccess(result)) {
       return f(getValue(result))
     } else {
       return result
