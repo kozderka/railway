@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export function pipe<A>(x: A): A
 export function pipe<A, B>(x: A, f1: (arg: A) => B): B
-export function pipe<A, B, C>(
-  x: A,
-  f1: (arg: A) => B,
-  f2: (arg: B) => C,
-): C
+export function pipe<A, B, C>(x: A, f1: (arg: A) => B, f2: (arg: B) => C): C
 export function pipe<A, B, C, D>(
   x: A,
   f1: (arg: A) => B,
@@ -83,17 +78,11 @@ export function pipe<A, B, C, D, E, F, G, H, I, J, K>(
   f9: (arg: I) => J,
   f10: (arg: J) => K,
 ): K
-export function pipe(
-  x: unknown,
-  ...fns: Array<Function>
-): unknown {
+export function pipe(x: unknown, ...fns: Array<Function>): unknown {
   return reduceLeft(x, fns)
 }
 
-export function reduceLeft(
-  value: unknown,
-  fns: Array<Function>,
-): unknown {
+export function reduceLeft(value: unknown, fns: Array<Function>): unknown {
   if (fns.length === 0) {
     return value
   }
@@ -103,11 +92,9 @@ export function reduceLeft(
   const result = fn(value)
 
   if (result instanceof Promise) {
-    return result.then(
-      (r: unknown): unknown => {
-        return reduceLeft(r, remainingFns)
-      },
-    )
+    return result.then((r: unknown): unknown => {
+      return reduceLeft(r, remainingFns)
+    })
   } else {
     return reduceLeft(result, remainingFns)
   }

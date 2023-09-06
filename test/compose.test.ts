@@ -13,8 +13,11 @@ import {
   add3WithoutRailwayResult,
   addFail,
   append1,
+  append1Async,
   append2,
+  append2Async,
   append3,
+  append3Async,
 } from './helpers'
 
 test('Call with empty argumets', () => {
@@ -53,7 +56,7 @@ test('Call async functions with success result', async () => {
 })
 
 test('Call async functions in correct order', () => {
-  const result = compose(chain(add1Async), chain(add2Async), add3Async)('')
+  const result = compose(chain(append1Async), chain(append2Async), append3Async)('')
 
   expect(result).resolves.toEqual(success('321'))
 })

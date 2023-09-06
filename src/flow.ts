@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/ban-types */
 import { reduceLeft } from './pipe'
 
-export function flow<A, B>(
-  ...fns: ((arg: any) => any | Promise<any>)[]
-): (x: A) => A | B | Promise<B> {
-  return (x: A): B | Promise<B> => {
+export function flow(...fns: Array<Function>): (x: unknown) => unknown {
+  return (x: unknown): unknown => {
     return reduceLeft(x, fns)
   }
 }
