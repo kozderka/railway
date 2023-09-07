@@ -1,2 +1,4 @@
-export * as pipe from './pipe'
-export * as compose from './compose'
+export * from './compose'
+export * from './flow'
+export { pipe } from './pipe'
+export * from './result'
