@@ -66,7 +66,12 @@ test('Call async functions with success result', async () => {
 })
 
 test('Call async functions in correct order', () => {
-  const result = pipe('', append1Async, chain(append2Async), chain(append3Async))
+  const result = pipe(
+    '',
+    append1Async,
+    chain(append2Async),
+    chain(append3Async),
+  )
 
   expect(result).resolves.toEqual(success('123'))
 })

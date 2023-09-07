@@ -56,7 +56,11 @@ test('Call async functions with success result', async () => {
 })
 
 test('Call async functions in correct order', () => {
-  const result = compose(chain(append1Async), chain(append2Async), append3Async)('')
+  const result = compose(
+    chain(append1Async),
+    chain(append2Async),
+    append3Async,
+  )('')
 
   expect(result).resolves.toEqual(success('321'))
 })
