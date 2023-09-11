@@ -3,28 +3,15 @@
   "version": "0.0.0-alpha.2",
   "description": "Package provides functions for railway oriented programming",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.6.0"
   },
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "type": "module",
   "scripts": {
     "build": "unbuild",
-    "dev": "vitest",
-    "lint": "eslint --ext .ts . --fix && prettier -c src test --write",
-    "test": "npm run lint && vitest --run --coverage",
-    "publish": "npm run lint && vitest run && npm run build && npm publish --access public"
+    "dev": "node --test --watch test/",
+    "lint": "eslint --ext .js . --fix && prettier -c src test --write",
+    "test": "node --test test/",
+    "publish": "npm run lint && node --test && npm run build && npm publish --access public"
   },
   "repository": {
     "type": "git",
@@ -36,14 +23,11 @@
   },
   "homepage": "https://github.com/kozderka/railway#readme",
   "devDependencies": {
-    "@types/node": "^20.4.8",
-    "@typescript-eslint/eslint-plugin": "^6.6.0",
-    "@typescript-eslint/parser": "^6.6.0",
-    "@vitest/coverage-v8": "^0.34.3",
-    "eslint": "^8.48.0",
-    "prettier": "^3.0.1",
-    "typescript": "^5.2.2",
-    "unbuild": "^2.0.0",
-    "vitest": "^0.34.3"
+    "eslint": "^8.49.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "prettier": "^3.0.1"
   }
 }
