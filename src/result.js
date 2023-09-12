@@ -20,7 +20,7 @@ const FAILURE = 'failure'
 /**
  *
  * @param {any} value
- * @returns Success
+ * @returns {Success}
  */
 export function success(value) {
   return { tag: SUCCESS, value }
@@ -29,7 +29,7 @@ export function success(value) {
 /**
  *
  * @param {any} error
- * @returns Failure
+ * @returns {Failure}
  */
 export function failure(error) {
   return { tag: FAILURE, error }
@@ -38,7 +38,7 @@ export function failure(error) {
 /**
  *
  * @param {Result} result
- * @returns boolean
+ * @returns {boolean}
  */
 export function isSuccess(result) {
   return result.tag === SUCCESS
@@ -47,7 +47,7 @@ export function isSuccess(result) {
 /**
  *
  * @param {Result} result
- * @returns boolean
+ * @returns {boolean}
  */
 export function isFailure(result) {
   return result.tag === FAILURE
@@ -56,7 +56,7 @@ export function isFailure(result) {
 /**
  *
  * @param {Result} result
- * @returns any
+ * @returns {any}
  */
 export function getValue(result) {
   if (isSuccess(result)) {
@@ -70,7 +70,7 @@ export function getValue(result) {
  *
  * @param {function} fn
  * @param {any} error
- * @returns Result
+ * @returns {function}
  */
 export function toResult(fn, error) {
   return (a) => {
@@ -85,7 +85,7 @@ export function toResult(fn, error) {
 /**
  *
  * @param {function} f
- * @returns
+ * @returns {function}
  */
 export function chain(f) {
   return (result) => {
@@ -102,7 +102,7 @@ export function chain(f) {
 /**
  *
  * @param {function} f
- * @returns any
+ * @returns {function}
  */
 export function tee(f) {
   return (result) => {

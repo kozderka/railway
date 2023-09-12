@@ -10,7 +10,7 @@
     "build": "unbuild",
     "dev": "node --test --watch test/",
     "lint": "eslint --ext .js . --fix && prettier -c src test --write",
-    "test": "node --test test/",
+    "test": "node --test --experimental-test-coverage test/",
     "publish": "npm run lint && node --test && npm run build && npm publish --access public"
   },
   "repository": {

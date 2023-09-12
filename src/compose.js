@@ -3,9 +3,9 @@ import { reduceLeft } from './pipe.js'
 /**
  *
  * @param  {function[]} fns
- * @returns function
+ * @returns {function}
  */
-export function compose (...fns) {
+export function compose(...fns) {
   const reversedFns = [...fns].reverse()
 
   return (x) => {

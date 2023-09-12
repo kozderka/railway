@@ -2,7 +2,7 @@
  *
  * @param {any} x
  * @param  {function[]} fns
- * @returns any
+ * @returns {any}
  */
 export function pipe(x, ...fns) {
   return reduceLeft(x, fns)
@@ -12,7 +12,7 @@ export function pipe(x, ...fns) {
  *
  * @param {any} value
  * @param {function[]} fns
- * @returns any
+ * @returns {any}
  */
 export function reduceLeft(value, fns) {
   if (fns.length === 0) {
