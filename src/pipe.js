@@ -1,20 +1,20 @@
 /**
  *
- * @param {any} x
- * @param  {function[]} fns
- * @returns {any}
+ * @param {*} x
+ * @param  {Array.<function(*):*>} fns
+ * @returns {*}
  */
-export function pipe(x, ...fns) {
+export function pipe (x, ...fns) {
   return reduceLeft(x, fns)
 }
 
 /**
  *
- * @param {any} value
- * @param {function[]} fns
- * @returns {any}
+ * @param {*} value
+ * @param {Array.<function(*):*>} fns
+ * @returns {*}
  */
-export function reduceLeft(value, fns) {
+export function reduceLeft (value, fns) {
   if (fns.length === 0) {
     return value
   }

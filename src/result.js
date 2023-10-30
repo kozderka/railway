@@ -2,36 +2,40 @@ const SUCCESS = 'success'
 const FAILURE = 'failure'
 
 /**
+ * @template T
  * @typedef {Object} Success
  * @property {'success'} tag
- * @property {any} value
+ * @property {T} value
  */
 
 /**
+ * @template T
  * @typedef {Object} Failure
  * @property {'failure'} tag
- * @property {any} error
+ * @property {T} error
  */
 
 /**
- * @typedef {Success | Failure} Result
+ * @template T
+ * @template U
+ * @typedef {Success<T> | Failure<U>} Result
  */
 
 /**
- *
- * @param {any} value
- * @returns {Success}
+ * @template T
+ * @param {T} value
+ * @returns {Success<T>}
  */
-export function success(value) {
+export function success (value) {
   return { tag: SUCCESS, value }
 }
 
 /**
- *
- * @param {any} error
- * @returns {Failure}
+ * @template T
+ * @param {T} error
+ * @returns {Failure<T>}
  */
-export function failure(error) {
+export function failure (error) {
   return { tag: FAILURE, error }
 }
 
@@ -40,7 +44,7 @@ export function failure(error) {
  * @param {Result} result
  * @returns {boolean}
  */
-export function isSuccess(result) {
+export function isSuccess (result) {
   return result.tag === SUCCESS
 }
 
@@ -49,16 +53,16 @@ export function isSuccess(result) {
  * @param {Result} result
  * @returns {boolean}
  */
-export function isFailure(result) {
+export function isFailure (result) {
   return result.tag === FAILURE
 }
 
 /**
  *
  * @param {Result} result
- * @returns {any}
+ * @returns {*}
  */
-export function getValue(result) {
+export function getValue (result) {
   if (isSuccess(result)) {
     return result.value
   } else {
@@ -68,11 +72,11 @@ export function getValue(result) {
 
 /**
  *
- * @param {function} fn
- * @param {any} error
- * @returns {function}
+ * @param {function(*):*} fn
+ * @param {*} error
+ * @returns {unction(*):*}
  */
-export function toResult(fn, error) {
+export function toResult (fn, error) {
   return (a) => {
     try {
       return success(fn(a))
@@ -84,10 +88,10 @@ export function toResult(fn, error) {
 
 /**
  *
- * @param {function} f
- * @returns {function}
+ * @param {function(*):*} f
+ * @returns {function(*):*}
  */
-export function chain(f) {
+export function chain (f) {
   return (result) => {
     if (result instanceof Promise) {
       return result.then(chain(f))
@@ -101,10 +105,10 @@ export function chain(f) {
 
 /**
  *
- * @param {function} f
- * @returns {function}
+ * @param {function(*):*} f
+ * @returns {function(*):*}
  */
-export function tee(f) {
+export function tee (f) {
   return (result) => {
     if (isSuccess(result)) {
       f(getValue(result))

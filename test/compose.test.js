@@ -17,7 +17,7 @@ import {
   append2,
   append2Async,
   append3,
-  append3Async,
+  append3Async
 } from './helpers.js'
 import { chain, failure, success, toResult } from '../src/result.js'
 
@@ -34,7 +34,7 @@ describe('compose', () => {
       chain(add2Async),
       chain(addFail),
       chain(add3Async),
-      add1,
+      add1
     )(0)
 
     assert.deepStrictEqual(result, failure('failure'))
@@ -45,7 +45,7 @@ describe('compose', () => {
       chain(add1),
       chain(add2Async),
       chain(add3Async),
-      add1,
+      add1
     )(0)
 
     assert.deepStrictEqual(result, success(7))
@@ -55,7 +55,7 @@ describe('compose', () => {
     const result = await compose(
       chain(add1Async),
       chain(add2Async),
-      add3Async,
+      add3Async
     )(0)
 
     assert.deepStrictEqual(result, success(6))
@@ -65,7 +65,7 @@ describe('compose', () => {
     const result = await compose(
       chain(append1Async),
       chain(append2Async),
-      append3Async,
+      append3Async
     )('')
 
     assert.deepStrictEqual(result, success('321'))
@@ -93,7 +93,7 @@ describe('compose', () => {
     const result = compose(
       add1WithoutRailwayResult,
       add2WithoutRailwayResult,
-      add3WithoutRailwayResult,
+      add3WithoutRailwayResult
     )(0)
 
     assert.deepStrictEqual(result, 6)
@@ -103,7 +103,7 @@ describe('compose', () => {
     const result = compose(
       chain(toResult(add1WithoutRailwayResult, 'failure')),
       add2,
-      add3WithoutRailwayResult,
+      add3WithoutRailwayResult
     )(0)
 
     assert.deepStrictEqual(result, success(6))
