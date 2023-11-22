@@ -1,4 +1,4 @@
-import { reduceLeft } from './pipe.js'
+import { reduce } from './pipe.js'
 
 /**
  *
@@ -7,6 +7,6 @@ import { reduceLeft } from './pipe.js'
  */
 export function flow (...fns) {
   return (x) => {
-    return reduceLeft(x, fns)
+    return reduce(x, fns)
   }
 }

@@ -27,7 +27,10 @@ const FAILURE = 'failure'
  * @returns {Success<T>}
  */
 export function success (value) {
-  return { tag: SUCCESS, value }
+  return {
+    tag: SUCCESS,
+    value
+  }
 }
 
 /**
@@ -58,9 +61,10 @@ export function isFailure (result) {
 }
 
 /**
- *
- * @param {Result} result
- * @returns {*}
+ * @template T
+ * @template U
+ * @param {Result<T, U>} result
+ * @returns {T}
  */
 export function getValue (result) {
   if (isSuccess(result)) {
@@ -71,18 +75,13 @@ export function getValue (result) {
 }
 
 /**
- *
- * @param {function(*):*} fn
- * @param {*} error
- * @returns {unction(*):*}
+ * @template T
+ * @param {function(*):*} f
+ * @returns {function(*):Success<T>}
  */
-export function toResult (fn, error) {
+export function map (f) {
   return (a) => {
-    try {
-      return success(fn(a))
-    } catch (e) {
-      return failure(error)
-    }
+    return success(f(a))
   }
 }
 
@@ -93,9 +92,7 @@ export function toResult (fn, error) {
  */
 export function chain (f) {
   return (result) => {
-    if (result instanceof Promise) {
-      return result.then(chain(f))
-    } else if (isSuccess(result)) {
+    if (isSuccess(result)) {
       return f(getValue(result))
     } else {
       return result
@@ -104,9 +101,10 @@ export function chain (f) {
 }
 
 /**
- *
+ * @template T
+ * @template U
  * @param {function(*):*} f
- * @returns {function(*):*}
+ * @returns {function(Result<T, U>):Result<T, U>}
  */
 export function tee (f) {
   return (result) => {

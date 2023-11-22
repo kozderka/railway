@@ -5,7 +5,7 @@
  * @returns {*}
  */
 export function pipe (x, ...fns) {
-  return reduceLeft(x, fns)
+  return reduce(x, fns)
 }
 
 /**
@@ -14,7 +14,7 @@ export function pipe (x, ...fns) {
  * @param {Array.<function(*):*>} fns
  * @returns {*}
  */
-export function reduceLeft (value, fns) {
+export function reduce (value, fns) {
   if (fns.length === 0) {
     return value
   }
@@ -25,9 +25,9 @@ export function reduceLeft (value, fns) {
 
   if (result instanceof Promise) {
     return result.then((r) => {
-      return reduceLeft(r, remainingFns)
+      return reduce(r, remainingFns)
     })
   } else {
-    return reduceLeft(result, remainingFns)
+    return reduce(result, remainingFns)
   }
 }

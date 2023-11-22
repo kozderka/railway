@@ -19,7 +19,8 @@ import {
   append3,
   append3Async
 } from './helpers.js'
-import { chain, failure, success, toResult } from '../src/result.js'
+import { chain, failure, success, map } from '../src/result.js'
+import { chain as taskChain } from '../src/task.js'
 
 describe('compose', () => {
   test('Call with empty argumets', () => {
@@ -48,6 +49,17 @@ describe('compose', () => {
       add1
     )(0)
 
+    assert.deepStrictEqual(result, success(7))
+  })
+
+  test('tasssk', async () => {
+    const result = await compose(
+      chain(add1),
+      chain(add2Async),
+      chain(add3Async),
+      add1
+    )(0)
+    console.log(result)
     assert.deepStrictEqual(result, success(7))
   })
 
@@ -101,7 +113,7 @@ describe('compose', () => {
 
   test('Mix clasic and railway functions', () => {
     const result = compose(
-      chain(toResult(add1WithoutRailwayResult, 'failure')),
+      chain(map(add1WithoutRailwayResult, 'failure')),
       add2,
       add3WithoutRailwayResult
     )(0)

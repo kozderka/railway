@@ -18,9 +18,9 @@ import {
   append2,
   append2Async,
   append3,
-  append3Async,
+  append3Async
 } from './helpers.js'
-import { chain, failure, success, toResult } from '../src/result.js'
+import { chain, failure, success, map } from '../src/result.js'
 
 describe('pipe', () => {
   test('Call with empty argumets', () => {
@@ -36,7 +36,7 @@ describe('pipe', () => {
       chain(add2Async),
       chain(addFailAsync),
       chain(add3Async),
-      chain(add1),
+      chain(add1)
     )
 
     assert.deepStrictEqual(result, failure('failure'))
@@ -49,7 +49,7 @@ describe('pipe', () => {
       chain(add2Async),
       chain(addFail),
       chain(add3Async),
-      chain(add1),
+      chain(add1)
     )
 
     assert.deepStrictEqual(result, failure('failure'))
@@ -61,7 +61,7 @@ describe('pipe', () => {
       add1,
       chain(add2Async),
       chain(add3Async),
-      chain(add1),
+      chain(add1)
     )
 
     assert.deepStrictEqual(result, success(7))
@@ -78,7 +78,7 @@ describe('pipe', () => {
       '',
       append1Async,
       chain(append2Async),
-      chain(append3Async),
+      chain(append3Async)
     )
 
     assert.deepStrictEqual(result, success('123'))
@@ -107,7 +107,7 @@ describe('pipe', () => {
       0,
       add1WithoutRailwayResult,
       add2WithoutRailwayResult,
-      add3WithoutRailwayResult,
+      add3WithoutRailwayResult
     )
 
     assert.deepStrictEqual(result, 6)
@@ -118,7 +118,7 @@ describe('pipe', () => {
       0,
       add1WithoutRailwayResult,
       add2,
-      chain(toResult(add3WithoutRailwayResult, 'failure')),
+      chain(map(add3WithoutRailwayResult, 'failure'))
     )
 
     assert.deepStrictEqual(result, success(6))
