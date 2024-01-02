@@ -14,69 +14,27 @@ Package includes types, interfaces and functions for support of railway oriented
 
 #### Table of Contents
 
-*   [compose](#compose)
-    *   [Parameters](#parameters)
-*   [flow](#flow)
-    *   [Parameters](#parameters-1)
-*   [pipe](#pipe)
-    *   [Parameters](#parameters-2)
-*   [reduce](#reduce)
-    *   [Parameters](#parameters-3)
 *   [Success](#success)
     *   [Properties](#properties)
 *   [Failure](#failure)
     *   [Properties](#properties-1)
 *   [Result](#result)
 *   [success](#success-1)
-    *   [Parameters](#parameters-4)
+    *   [Parameters](#parameters)
 *   [failure](#failure-1)
-    *   [Parameters](#parameters-5)
+    *   [Parameters](#parameters-1)
 *   [isSuccess](#issuccess)
-    *   [Parameters](#parameters-6)
+    *   [Parameters](#parameters-2)
 *   [isFailure](#isfailure)
-    *   [Parameters](#parameters-7)
+    *   [Parameters](#parameters-3)
 *   [getValue](#getvalue)
-    *   [Parameters](#parameters-8)
+    *   [Parameters](#parameters-4)
 *   [map](#map)
-    *   [Parameters](#parameters-9)
+    *   [Parameters](#parameters-5)
 *   [chain](#chain)
-    *   [Parameters](#parameters-10)
+    *   [Parameters](#parameters-6)
 *   [tee](#tee)
-    *   [Parameters](#parameters-11)
-
-### compose
-
-#### Parameters
-
-*   `fns` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<function (any): any>**&#x20;
-
-Returns **function (any): any**&#x20;
-
-### flow
-
-#### Parameters
-
-*   `fns` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<function (any): any>**&#x20;
-
-Returns **function (any): any**&#x20;
-
-### pipe
-
-#### Parameters
-
-*   `x` **any**&#x20;
-*   `fns` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<function (any): any>**&#x20;
-
-Returns **any**&#x20;
-
-### reduce
-
-#### Parameters
-
-*   `value` **any**&#x20;
-*   `fns` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)\<function (any): any>**&#x20;
-
-Returns **any**&#x20;
+    *   [Parameters](#parameters-7)
 
 ### Success
 
